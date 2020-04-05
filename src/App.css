@@ -1,38 +1,143 @@
-.App {
-  text-align: center;
+:root {
+  --button-font: "Montserrat", sans-serif;
+  --button-padding: 10px 12px;
+  --button-text-transform: uppercase;
+  --button-font-weight: 700;
+  --button-letter-spacing: 0.5px;
+  --button-border-radius: 2px;
+  --cream: #f3efe7;
+  --white: white;
+  --black: #141416;
+  --gray: #999999;
+  --lime-green: #b8d940;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+body > div > div {
+  padding: 10px;
+  font-family: "Montserrat", sans-serif;
+  height: 97vh;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  background-color: var(--cream);
+  color: var(--black);
+}
+
+p,
+h1 {
+  margin: 0;
+}
+
+header {
+  display: flex;
   align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+header > div > svg {
+  max-width: 12px;
+}
+
+header > div:hover .plus-icon-fill,
+header > div:hover {
+  fill: var(--lime-green);
+}
+
+.submit-button:hover p > a[href],
+.submit-button:hover {
+  color: var(--lime-green);
+}
+
+.submit-button:hover {
+  background-color: var(--white);
+}
+
+.submit-button {
+  display: flex;
+  align-items: center;
+  font-family: var(--button-font);
+  padding: 4px 12px;
+  text-transform: var(--button-text-transform);
+  font-weight: var(--button-font-weight);
+  letter-spacing: var(--button-letter-spacing);
+  font-size: 11px;
+  border-radius: var(--button-border-radius);
+  cursor: pointer;
+}
+
+.submit-button > p > a {
+  text-decoration: none;
+  color: var(--black);
+  margin-left: 6px;
+}
+
+.submit-button > p > a:hover {
+  font-weight: var(--button-font-weight);
+}
+
+h1 {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+main {
+  margin: 0 auto;
+  text-align: center;
+  max-width: 800px;
+}
+
+main > h2 {
+  margin-bottom: 0.6rem;
+}
+
+main > p {
+  font-size: 0.7rem;
+  color: var(--gray);
+}
+
+main > p > cite > a[href] {
+  color: var(--gray);
+}
+
+h2 {
+  font-family: "IBM Plex Serif", serif;
+  text-transform: lowercase;
+  font-size: 2rem;
+  color: var(--black);
+}
+
+a[href] {
+  color: var(--black);
+}
+
+a[href]:hover {
+  color: var(--lime-green);
+}
+
+button {
+  font-family: var(--button-font);
+  padding: var(--button-padding);
+  text-transform: var(--button-text-transform);
+  font-weight: var(--button-font-weight);
+  letter-spacing: var(--button-letter-spacing);
+  background-color: var(--white);
+  color: var(--black);
+  border: none;
+  border-radius: var(--button-border-radius);
+  cursor: pointer;
+  margin-top: 2rem;
+}
+
+button:hover {
+  background-color: var(--lime-green);
+}
+
+footer {
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+footer > p {
+  font-size: 0.8rem;
 }
