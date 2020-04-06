@@ -4,49 +4,39 @@ import "./App.css";
 import QuestionPrompt from "./Prompts";
 
 function App() {
-  const [questions, setQuestions] = useState([]);
-  const [activeQuestionIndex, setActiveQuestionIndex] = useState(0);
+  const [question, setQuestion] = useState({});
+  const DATABASE_LENGTH = 454;
+  const randomDocId = getRandomInt(0, DATABASE_LENGTH);
+  const docRef = firestore.collection("questions").doc(`id_${randomDocId}`);
 
-  const shuffle = array => {
-    var currentIndex = array.length,
-      temporaryValue,
-      randomIndex;
+  function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
 
-    // While there remain elements to shuffle...
-    while (0 !== currentIndex) {
-      // Pick a remaining element...
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
-
-      // And swap it with the current element.
-      temporaryValue = array[currentIndex];
-      array[currentIndex] = array[randomIndex];
-      array[randomIndex] = temporaryValue;
-    }
-
-    return array;
+  const getDataFromFirebase = () => {
+    docRef
+      .get()
+      .then(function(doc) {
+        if (doc.exists) {
+          setQuestion(doc.data());
+        } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+        }
+      })
+      .catch(function(error) {
+        console.log("Error getting document:", error);
+      });
   };
 
   useEffect(() => {
-    let arrayOfData = [];
-    const collectionsRef = firestore.collection("questions");
-    collectionsRef.get().then(function(querySnapshot) {
-      querySnapshot.forEach(function(doc) {
-        const dataToAdd = {
-          ...doc.data(),
-          id: doc.id
-        };
-        arrayOfData.push(dataToAdd);
-      });
-      const shuffledData = shuffle(arrayOfData);
-      setQuestions(shuffledData);
-    });
+    getDataFromFirebase();
   }, []);
 
   const handleNextPromptClick = () => {
-    if (activeQuestionIndex === questions.length - 1) {
-      setActiveQuestionIndex(0);
-    } else setActiveQuestionIndex(activeQuestionIndex + 1);
+    getDataFromFirebase();
   };
 
   return (
@@ -59,14 +49,16 @@ function App() {
             <path d="M0 0h24v24H0z" fill="none" />
           </svg>
           <p>
-            <a href="google.com">Submit a question or prompt</a>
+            <a href="https://samanthaandrews.typeform.com/to/XiSc6n" rel="noopener noreferrer" target="_blank">
+              Submit a question or prompt
+            </a>
           </p>
         </div>
       </header>
       <main>
-        {questions.length ? (
+        {question ? (
           <>
-            <QuestionPrompt question={questions[activeQuestionIndex]} />
+            <QuestionPrompt question={question} />
             <button onClick={handleNextPromptClick}>Next prompt</button>
           </>
         ) : (
@@ -75,8 +67,15 @@ function App() {
       </main>
       <footer>
         <p>
-          Made by <a href="https://samantha-andrews.com/">Samantha Andrews</a> • This is an open source project,{" "}
-          <a href="github.com">click here</a> to contribute
+          Made by{" "}
+          <a href="https://samantha-andrews.com/" rel="noopener noreferrer" target="_blank">
+            Samantha Andrews
+          </a>{" "}
+          • This is an open source project,{" "}
+          <a rel="noopener noreferrer" target="_blank" href="github.com">
+            click here
+          </a>{" "}
+          to contribute
         </p>
       </footer>
     </div>

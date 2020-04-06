@@ -7,9 +7,11 @@ function QuestionPrompt({ question }) {
     <>
       <h2>{prompt}</h2>
       <p>
-        Brought to you by{" "}
+        This prompt was brought to you by{" "}
         <cite>
-          <a href={link}>{attribution}</a>
+          <a href={link} rel="noopener noreferrer" target="_blank">
+            {attribution}
+          </a>
         </cite>
       </p>
     </>
