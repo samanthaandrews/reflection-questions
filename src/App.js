@@ -10,7 +10,7 @@ function App() {
   const generateNewDocID = getRandomInt(0, DATABASE_LENGTH);
   const [question, setQuestion] = useState({});
   const [randomDocId, setRandomDocId] = useState(generateNewDocID);
-  const [error, setError] = useState(true);
+  const [error, setError] = useState(false);
 
   function getRandomInt(min, max) {
     min = Math.ceil(min);
