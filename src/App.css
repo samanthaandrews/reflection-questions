@@ -10,6 +10,8 @@
   --black: #262626;
   --gray: #999999;
   --lime-green: #b8d940;
+  --error: #f54260;
+  --errorLight: #ffc7d1;
 }
 
 body > div > div {
@@ -21,6 +23,15 @@ body > div > div {
   justify-content: space-between;
   background-color: var(--cream);
   color: var(--black);
+}
+
+.error {
+  background: var(--errorLight);
+  color: var(--error);
+  font-size: 0.5rem;
+  align-self: center;
+  padding: var(--button-padding);
+  border-radius: var(--button-border-radius);
 }
 
 p,
@@ -87,16 +98,16 @@ main {
   max-width: 800px;
 }
 
-main > h2 {
+main > div > h2 {
   margin-bottom: 0.6rem;
 }
 
-main > p {
+main > div > p {
   font-size: 0.7rem;
   color: var(--gray);
 }
 
-main > p > cite > a[href] {
+main > div > p > cite > a[href] {
   color: var(--gray);
 }
 

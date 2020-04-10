@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react";
 import firestore from "./firebase";
 import "./App.css";
 import QuestionPrompt from "./Prompts";
+import ErrorMessage from "./ErrorMessage";
+import ErrorBoundary from "./ErrorBoundary";
 
 function App() {
-  const [question, setQuestion] = useState({});
   const DATABASE_LENGTH = 454;
-  const randomDocId = getRandomInt(0, DATABASE_LENGTH);
-  const docRef = firestore.collection("questions").doc(`id_${randomDocId}`);
+  const generateNewDocID = getRandomInt(0, DATABASE_LENGTH);
+  const [question, setQuestion] = useState({});
+  const [randomDocId, setRandomDocId] = useState(generateNewDocID);
+  const [error, setError] = useState(true);
 
   function getRandomInt(min, max) {
     min = Math.ceil(min);
@@ -15,28 +18,27 @@ function App() {
     return Math.floor(Math.random() * (max - min)) + min;
   }
 
-  const getDataFromFirebase = () => {
+  useEffect(() => {
+    const docRef = firestore.collection("questions").doc(`id_${randomDocId}`);
     docRef
       .get()
-      .then(function(doc) {
+      .then(function (doc) {
         if (doc.exists) {
           setQuestion(doc.data());
         } else {
           // doc.data() will be undefined in this case
-          console.log("No such document!");
+          setError(true);
+          console.error("No such document!");
         }
       })
-      .catch(function(error) {
-        console.log("Error getting document:", error);
+      .catch(function (error) {
+        setError(true);
+        console.error("Error getting document:", error);
       });
-  };
+  }, [randomDocId]);
 
-  useEffect(() => {
-    getDataFromFirebase();
-  }, []);
-
-  const handleNextPromptClick = () => {
-    getDataFromFirebase();
+  const fakeError = () => {
+    throw new Error("oh no something bad happened!");
   };
 
   return (
@@ -59,12 +61,14 @@ function App() {
         {question ? (
           <>
             <QuestionPrompt question={question} />
-            <button onClick={handleNextPromptClick}>Next prompt</button>
+            <button onClick={() => fakeError()}>Next prompt</button>
+            {/* <button onClick={() => setRandomDocId(generateNewDocID)}>Next prompt</button> */}
           </>
         ) : (
           <h2>Loading questions...</h2>
         )}
       </main>
+      {error && <ErrorMessage />}
       <footer>
         <p>
           Made by{" "}
