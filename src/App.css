@@ -29,9 +29,22 @@ body > div > div {
   background: var(--errorLight);
   color: var(--error);
   font-size: 0.5rem;
-  align-self: center;
+  position: absolute;
+  top: 6em;
+  right: 1.5em;
   padding: var(--button-padding);
   border-radius: var(--button-border-radius);
+  display: flex;
+  align-items: center;
+}
+
+.error > svg {
+  max-width: 12px;
+  margin-left: 20px;
+}
+
+.error-close-icon-fill {
+  fill: var(--error);
 }
 
 p,

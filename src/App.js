@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
+import * as Sentry from "@sentry/browser";
 import firestore from "./firebase";
-import "./App.css";
 import QuestionPrompt from "./Prompts";
 import ErrorMessage from "./ErrorMessage";
-import ErrorBoundary from "./ErrorBoundary";
+import "./App.css";
 
 function App() {
   const DATABASE_LENGTH = 454;
@@ -29,20 +29,23 @@ function App() {
           // doc.data() will be undefined in this case
           setError(true);
           console.error("No such document!");
+          Sentry.withScope((scope) => {
+            scope.setExtras("Firebase error, doc.data() is undefined, no such document!");
+          });
         }
       })
       .catch(function (error) {
         setError(true);
         console.error("Error getting document:", error);
+        Sentry.withScope((scope) => {
+          scope.setExtras(error);
+        });
       });
   }, [randomDocId]);
 
-  const fakeError = () => {
-    throw new Error("oh no something bad happened!");
-  };
-
   return (
     <div>
+      {error && <ErrorMessage setError={setError} />}
       <header>
         <h1>Reflection Questions & Journaling Prompts</h1>
         <div className="submit-button">
@@ -61,14 +64,12 @@ function App() {
         {question ? (
           <>
             <QuestionPrompt question={question} />
-            <button onClick={() => fakeError()}>Next prompt</button>
-            {/* <button onClick={() => setRandomDocId(generateNewDocID)}>Next prompt</button> */}
+            <button onClick={() => setRandomDocId(generateNewDocID)}>Next prompt</button>
           </>
         ) : (
           <h2>Loading questions...</h2>
         )}
       </main>
-      {error && <ErrorMessage />}
       <footer>
         <p>
           Made by{" "}
@@ -76,7 +77,7 @@ function App() {
             Samantha Andrews
           </a>{" "}
           • This is an open source project,{" "}
-          <a rel="noopener noreferrer" target="_blank" href="github.com">
+          <a rel="noopener noreferrer" target="_blank" href="https://github.com/samanthaandrews/reflection-questions">
             click here
           </a>{" "}
           to contribute

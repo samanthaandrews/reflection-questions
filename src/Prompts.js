@@ -12,6 +12,7 @@ function QuestionPrompt({ question }) {
   return (
     <>
       <Anime {...animeProps}>
+        {console.log("we were here")}
         <h2>{prompt}</h2>
         <p>
           This prompt was brought to you by{" "}
