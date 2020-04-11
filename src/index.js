@@ -6,7 +6,7 @@ import ErrorBoundary from "./ErrorBoundary";
 import * as serviceWorker from "./serviceWorker";
 import "./index.css";
 
-Sentry.init({ dsn: process.env.REACT_APP_SENTRY_DSN });
+Sentry.init({ dsn: "https://8f1364d872434313a442dbe9b69b0688@o376128.ingest.sentry.io/5196546" });
 
 ReactDOM.render(
   <React.StrictMode>
