@@ -53,14 +53,16 @@ function QuestionPrompt({ setError }) {
         <>
           <Anime {...animeProps}>
             <h2>{question.prompt}</h2>
-            <p>
-              This prompt was brought to you by{" "}
-              <cite>
-                <a href={question.link} rel="noopener noreferrer" target="_blank">
-                  {question.attribution}
-                </a>
-              </cite>
-            </p>
+            {question.attribution && (
+              <p>
+                This prompt was brought to you by{" "}
+                <cite>
+                  <a href={question.link} rel="noopener noreferrer" target="_blank">
+                    {question.attribution}
+                  </a>
+                </cite>
+              </p>
+            )}
           </Anime>
           <button onClick={() => setRandomDocId(generateNewDocID)}>Next prompt</button>
         </>
