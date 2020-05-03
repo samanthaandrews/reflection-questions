@@ -10,7 +10,6 @@ function QuestionPrompt({ setError }) {
   const [question, setQuestion] = useState({});
   const [randomDocId, setRandomDocId] = useState(generateNewDocID);
 
-  // const { prompt, attribution, link } = question;
   const animeProps = {
     opacity: [0, 1],
     duration: 2000,
