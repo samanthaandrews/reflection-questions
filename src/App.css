@@ -17,7 +17,7 @@
 body > div > div {
   padding: 10px;
   font-family: "Montserrat", sans-serif;
-  height: 97vh;
+  height: calc(100vh - 20px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -93,11 +93,14 @@ header > div:hover {
 .submit-button > p > a {
   text-decoration: none;
   color: var(--black);
-  margin-left: 6px;
 }
 
 .submit-button > p > a:hover {
   font-weight: var(--button-font-weight);
+}
+
+.add-icon {
+  margin-right: 6px;
 }
 
 h1 {
