@@ -45,7 +45,7 @@ function QuestionPrompt({ setError }) {
           scope.setExtras(error);
         });
       });
-  }, [randomDocId]);
+  }, [randomDocId, setError]);
 
   return (
     <main>
