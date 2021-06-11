@@ -23,6 +23,7 @@ function QuestionPrompt({ setError }) {
   }
 
   useEffect(() => {
+    console.log("DOCID", randomDocId);
     const docRef = firestore.collection("questions").doc(`id_${randomDocId}`);
     docRef
       .get()
