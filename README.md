@@ -1,3 +1,13 @@
+I experienced the power of thoughtful reflection during my freshman year of college when one professor required us to keep a journal. Each week I wrote my thoughts in response to an assigned set of reading questions. These prompts gave me the space to question existing beliefs and strengthen my critical thinking. I decided to publish my growing list of reflection questions and prompts as a web app and share the power of journaling with the world.
+
+This reflection questions app contains over 450 prompts. (Many of them come directly from the professor who assigned them to me in 2010!)
+
+I'd like to thank all the folks who graciously allowed me to use their questions in the app.
+
+> “We do not learn from experience, we learn from reflecting on experience.” — John Dewey
+
+> “In the journal I do not just express myself more openly than I could do to any person; I create myself. The journal is a vehicle for my sense of selfhood.” —Susan Sontag
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
